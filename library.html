@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>慢读室 · 拾窗</title>
+<meta name="description" content="慢读室——su 和 ee 的长文，值得慢慢读。">
+<link rel="stylesheet" href="assets/css/theme.css">
+<link rel="stylesheet" href="assets/css/page.css">
+<link rel="stylesheet" href="assets/css/library.css">
+<link rel="stylesheet" href="assets/css/interact.css">
+</head>
+<body>
+
+<header class="page-bar">
+  <a class="back-home" href="index.html">☙ 返回屋顶</a>
+  <span class="crumb">~/rooms/</span>
+  <span class="room-name">慢读室</span>
+</header>
+
+<main class="page-main">
+
+  <figure class="win-frame">
+    <img src="assets/img/library.png" alt="慢读室——书架与窗边的阅读角">
+    <figcaption>library · 雨天最适合待着的房间</figcaption>
+  </figure>
+
+  <div class="room-head">
+    <h1>慢读室</h1>
+    <p class="sub">ROOM 01 · <b>长文与随笔</b> · 每篇都值得一个安静的下午</p>
+  </div>
+
+  <div class="library-layout">
+
+    <!-- 书脊书架 -->
+    <nav class="shelf paper-window" aria-label="文章目录">
+      <div class="win-bar">
+        <span class="path">书架 · 按时间排放</span>
+      </div>
+      <div class="shelf-body" id="shelf">
+        <a class="book b-pine" href="#essay-0" data-idx="0"><span class="spine-title">慢读室开卷语</span></a>
+        <a class="book b-rust" href="#essay-1" data-idx="1"><span class="spine-title">山中的信（待填）</span></a>
+        <a class="book b-amber" href="#essay-2" data-idx="2"><span class="spine-title">待写的故事</span></a>
+        <div class="shelf-shelfline"></div>
+        <p class="shelf-note">抽出一本，坐到窗边去吧。</p>
+      </div>
+    </nav>
+
+    <!-- 稿纸窗口 -->
+    <section class="reading paper-window">
+      <div class="win-bar">
+        <span class="path" id="readerPath">今天读点慢的</span>
+        <span class="win-actions" id="readerMeta"> Draft 1 </span>
+      </div>
+      <div class="manuscript" id="readerBody">
+        <!-- JS 会在这里铺开稿纸 -->
+      </div>
+    </section>
+
+  </div><button class="desk-teacup" id="deskTeacup" title="倒杯热茶" aria-label="倒一杯热茶"><img src="assets/img/deco/obj_teacup.png"
+      alt=""></button>
+</main>
+
+<button class="night-toggle" title="夜灯">☽</button>
+<a class="to-roof" href="index.html">← 返回屋顶</a>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/interact.js"></script>
+<script src="assets/js/library.js"></script>
+</body>
+</html>

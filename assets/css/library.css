@@ -1,0 +1,104 @@
+/* ============================================================
+   慢读室 —— 书脊书架 + 稿纸阅读窗
+   ============================================================ */
+
+.library-layout {
+  display: flex;
+  gap: 30px;
+  align-items: stretch;
+  justify-content: center;
+}
+
+/* ---------- 书架 ---------- */
+.shelf { width: 250px; flex: none; align-self: flex-start; position: sticky; top: 86px; }
+.shelf-body {
+  padding: 24px 20px 18px;
+  display: flex; flex-wrap: wrap;
+  align-content: flex-start; gap: 8px 7px;
+  min-height: 300px;
+}
+.book {
+  display: flex; align-items: center; justify-content: center;
+  width: 44px; height: 128px;
+  border-radius: 3px 3px 2px 2px;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.14), 1px 2px 4px rgba(0,0,0,.18);
+  transition: transform .22s ease, box-shadow .22s ease;
+  position: relative;
+}
+.book .spine-title {
+  writing-mode: vertical-rl;
+  font-size: 13px; letter-spacing: .18em;
+  color: rgba(255, 252, 244, .92);
+  max-height: 112px; overflow: hidden;
+}
+.b-pine  { background: linear-gradient(160deg, #8a5a3b, #6b4429); }
+.b-rust  { background: linear-gradient(160deg, #b96a4b, #9c5538); }
+.b-amber { background: linear-gradient(160deg, #c89b3c, #a97e28); }
+.book:hover, .book.active {
+  transform: translateY(-7px) rotate(-1.2deg);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.2), 2px 6px 12px rgba(0,0,0,.24);
+}
+/* 斜靠的书，最后一本 */
+.book.leaning { transform: rotate(9deg) translateY(-2px); transform-origin: bottom left; }
+.shelf-shelfline {
+  width: 100%; height: 5px; margin-top: -3px;
+  background: var(--paper-dim);
+  border-top: 1px solid var(--line);
+  border-radius: 2px;
+}
+.shelf-note {
+  width: 100%; margin-top: 14px;
+  text-align: center;
+  font-size: 11.5px; color: var(--ink-faint);
+  letter-spacing: .18em;
+}
+
+/* ---------- 稿纸阅读窗 ---------- */
+.reading { flex: 1; max-width: 660px; min-width: 0; }
+.manuscript {
+  padding: 30px 34px 36px;
+  max-height: 68vh; overflow: auto;
+}
+/* 稿纸格子：竖向细线，像方格稿纸 */
+.manuscript .essay {
+  background-image: repeating-linear-gradient(
+    180deg, transparent 0, transparent calc(2.05em - 1px),
+    var(--line-soft) calc(2.05em - 1px), var(--line-soft) 2.05em);
+  line-height: 2.05;
+}
+.manuscript h2 {
+  font-size: 24px; font-weight: 400;
+  letter-spacing: .22em;
+  margin-bottom: 6px; color: var(--ink);
+}
+.manuscript .essay-meta {
+  font-family: var(--mono); font-size: 11px;
+  color: var(--ink-faint); letter-spacing: .15em;
+  line-height: 1.9;
+  margin-bottom: 22px;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed var(--line);
+  background-image: none;
+}
+.manuscript p { margin: 0 0 14px; font-size: 15.5px; color: var(--ink-soft); text-align: justify; }
+.manuscript p:first-of-type::first-letter {
+  font-size: 2.1em; color: var(--pine-deep);
+  float: left; line-height: 1;
+  padding: 4px 8px 0 0;
+}
+.manuscript .essay-end {
+  text-align: center; margin-top: 26px;
+  color: var(--ink-faint); letter-spacing: .5em; text-indent: .5em;
+}
+
+/* 淡入 */
+.manuscript .essay { animation: ink-in .6s ease both; }
+@keyframes ink-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 860px) {
+  .library-layout { flex-direction: column; align-items: center; }
+  .shelf { position: static; width: 100%; max-width: 480px; }
+  .reading { max-width: 100%; width: 100%; }
+  .manuscript { max-height: none; }
+}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>拾窗 · su &amp; ee 的小屋</title>
+<meta name="description" content="拾窗——su 与 ee 的双人小站。一个在高原看云，一个在南方淋雨，小屋盖在中间。">
+<link rel="stylesheet" href="assets/css/theme.css">
+<link rel="stylesheet" href="assets/css/index.css">
+<link rel="stylesheet" href="assets/css/interact.css">
+</head>
+<body>
+
+<!-- ========== 第一幕：黄昏小屋（整幅插画即主页） ========== -->
+<section class="hero">
+  <div class="hero-stage" id="heroStage">
+    <img class="hero-img" src="assets/img/hero_home.png" alt="黄昏山丘上的小屋，窗里亮着灯，屋顶也有一扇小窗">
+
+    <!-- 题字：写在右上天空中 -->
+    <div class="hero-title">
+      <h1>拾窗</h1>
+      <p class="byline"><b>su</b> <i>&amp;</i> <b>ee</b> 的小站</p>
+      <p class="hero-line" id="heroLine"></p>
+      <p class="hero-hint" id="heroHint">挑一扇亮灯的窗，推开看看</p>
+    </div>
+
+    <!-- 热区：与插图中元素一一对应（坐标为画面百分比） -->
+    <nav class="spots" aria-label="房间导航">
+      <a class="spot spot-cat"     href="cat.html"      style="--x:45%;--y:16%;--w:9%;--h:8%"  data-tip="屋顶的猫窝 · 404"></a>
+      <a class="spot"              href="library.html"  style="--x:28%;--y:31%;--w:7%;--h:8%"  data-tip="慢读室 · 长文"></a>
+      <a class="spot"              href="whispers.html" style="--x:50.5%;--y:30.5%;--w:10%;--h:11%" data-tip="檐下碎语 · 碎碎念"></a>
+      <a class="spot"              href="workshop.html" style="--x:22.5%;--y:43.5%;--w:7%;--h:10%"   data-tip="工作间 · 技术作品"></a>
+      <a class="spot"              href="misc.html"     style="--x:30.5%;--y:43%;--w:9%;--h:10%"   data-tip="拾遗集 · 其他作品"></a>
+      <a class="spot"              href="music.html"    style="--x:54%;--y:46%;--w:5%;--h:7%"   data-tip="八音盒 · 收藏音乐"></a>
+      <a class="spot"              href="gallery.html"  style="--x:64.5%;--y:47.5%;--w:7%;--h:9%"   data-tip="明信片墙 · 收藏图片"></a>
+      <a class="spot"              href="cinema.html"   style="--x:63%;--y:36%;--w:6%;--h:8%"  data-tip="放映室 · 收藏视频"></a>
+      <a class="spot spot-door"    href="about.html"    style="--x:48%;--y:48%;--w:7%;--h:16%"  data-tip="门一直虚掩着 · 关于我们"></a>
+    </nav>
+  </div>
+
+  <a class="scroll-hint" href="#desk" title="去楼下看看">
+    <span>楼下的桌面</span>
+    <i>↓</i>
+  </a>
+</section>
+
+<!-- ========== 第二幕：楼下的桌面（贴纸目录） ========== -->
+<section class="desk" id="desk">
+  <header class="desk-head">
+    <p class="sec-kicker">ROOM DIRECTORY</p>
+    <h2>楼下的桌面</h2>
+    <p class="desk-sub">每样小物件，都是一个房间的钥匙</p>
+  </header>
+
+  <div class="stickers">
+    <a class="sticker" href="library.html">
+      <img src="assets/img/deco/obj_books.png" alt="">
+      <span class="st-name">慢读室</span>
+      <span class="st-sub">长文 · 慢慢读</span>
+    </a>
+    <a class="sticker" href="whispers.html">
+      <img src="assets/img/deco/obj_plant.png" alt="">
+      <span class="st-name">檐下碎语</span>
+      <span class="st-sub">碎碎念 · 风一吹就散</span>
+    </a>
+    <a class="sticker" href="workshop.html">
+      <img src="assets/img/deco/obj_computer.png" alt="">
+      <span class="st-name">工作间</span>
+      <span class="st-sub">技术作品 · 正在输出</span>
+    </a>
+    <a class="sticker" href="misc.html">
+      <img src="assets/img/deco/obj_camera.png" alt="">
+      <span class="st-name">拾遗集</span>
+      <span class="st-sub">其他作品 · 散步捡的</span>
+    </a>
+    <a class="sticker" href="music.html">
+      <img src="assets/img/deco/obj_musicbox.png" alt="">
+      <span class="st-name">八音盒</span>
+      <span class="st-sub">收藏音乐 · 上好发条</span>
+    </a>
+    <a class="sticker" href="gallery.html">
+      <img src="assets/img/deco/obj_postcards.png" alt="">
+      <span class="st-name">明信片墙</span>
+      <span class="st-sub">收藏图片 · 盖着邮戳</span>
+    </a>
+    <a class="sticker" href="cinema.html">
+      <img src="assets/img/deco/obj_film.png" alt="">
+      <span class="st-name">放映室</span>
+      <span class="st-sub">收藏视频 · 本期上映</span>
+    </a>
+    <a class="sticker" href="about.html">
+      <img src="assets/img/deco/obj_letter.png" alt="">
+      <span class="st-name">关于小屋</span>
+      <span class="st-sub">我们 · 以及信箱</span>
+    </a>
+  </div>
+
+  <a class="desk-cat" href="cat.html" title="猫威见（404）">
+    <img src="assets/img/deco/obj_cat.png" alt="窗台打盹的猫">
+    <span>云撸猫入口（本猫不在家）→</span>
+  </a>
+</section>
+
+<button class="night-toggle" title="夜灯">☽</button>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/interact.js"></script>
+<script src="assets/js/index.js"></script>
+</body>
+</html>

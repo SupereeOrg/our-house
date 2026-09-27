@@ -1,0 +1,102 @@
+/* ============================================================
+   明信片墙 —— 挂绳与宝丽来卡片
+   ============================================================ */
+
+/* 射灯 */
+.gallery-lamp {
+  position: relative;
+  width: 0; height: 0;
+  margin: 0 auto;
+}
+.gallery-lamp::before {
+  content: "";
+  position: absolute; left: 50%; top: 0;
+  width: 6px; height: 22px;
+  transform: translateX(-50%);
+  background: var(--ink-soft);
+  border-radius: 3px;
+}
+.gallery-lamp::after {
+  content: "";
+  position: absolute; left: 50%; top: 20px;
+  transform: translateX(-50%);
+  width: 340px; height: 70px;
+  background: radial-gradient(ellipse at 50% 0%,
+    rgba(200, 155, 60, .18), transparent 70%);
+  pointer-events: none;
+}
+
+/* ---------- 挂绳 ---------- */
+.ropes { max-width: 920px; margin: 0 auto; }
+.rope {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 46px 10px 30px;
+  margin-bottom: 6px;
+}
+.rope::before {
+  content: "";
+  position: absolute; top: 22px; left: 6%; right: 6%;
+  height: 34px;
+  border-bottom: 1.5px solid var(--ink-faint);
+  border-radius: 0 0 50% 50% / 0 0 100% 100%;
+  opacity: .6;
+}
+
+/* 宝丽来卡片 */
+.card {
+  position: relative;
+  width: 200px;
+  padding: 10px 10px 12px;
+  background: #fffdf8;
+  border: 1px solid rgba(60,50,40,.12);
+  box-shadow: 0 3px 10px rgba(60,50,40,.16);
+  margin: 0;
+  transition: transform .3s ease, box-shadow .3s ease, z-index 0s;
+}
+.card img {
+  display: block; width: 100%; height: 140px;
+  object-fit: cover;
+  filter: saturate(.92) sepia(.06);
+}
+.card figcaption {
+  padding-top: 9px;
+  text-align: center;
+  font-size: 12px; color: var(--ink-soft);
+  letter-spacing: .1em;
+}
+/* 图钉 */
+.card::before {
+  content: "";
+  position: absolute; top: -7px; left: 50%;
+  transform: translateX(-50%);
+  width: 12px; height: 12px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #e8b7c3, var(--rust) 70%);
+  box-shadow: 0 2px 3px rgba(0,0,0,.3);
+}
+/* 各自歪斜地挂着，用细绳吊着的感觉 */
+.c-1 { transform: rotate(-3.5deg); }
+.c-2 { transform: rotate(2deg) translateY(12px); }
+.c-3 { transform: rotate(-1.5deg) translateY(4px); }
+.c-4 { transform: rotate(2.6deg); }
+.c-5 { transform: rotate(-2.2deg) translateY(10px); }
+.card:hover {
+  transform: rotate(0) translateY(-4px) scale(1.04);
+  box-shadow: 0 10px 26px rgba(60,50,40,.24);
+  z-index: 5;
+}
+/* hover 放大预览 */
+.card:hover img { filter: none; }
+
+.gallery-note {
+  margin-top: 30px; text-align: center;
+  font-size: 12px; color: var(--ink-faint);
+  letter-spacing: .25em;
+}
+
+@media (max-width: 760px) {
+  .rope { flex-wrap: wrap; gap: 26px; }
+  .rope::before { display: none; }
+}

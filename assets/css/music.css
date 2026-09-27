@@ -1,0 +1,159 @@
+/* ============================================================
+   八音盒 —— 唱机 + 唱片套列表
+   ============================================================ */
+
+/* ---------- 唱机 ---------- */
+.gramo {
+  position: relative;
+  width: 190px;
+  margin: 0 auto 44px;
+  text-align: center;
+}
+.disc {
+  position: relative;
+  width: 170px; height: 170px;
+  margin: 0 auto;
+  border-radius: 50%;
+  background: repeating-radial-gradient(circle at 50% 50%,
+    #2e2a26 0 2px, #241f1c 2px 4px);
+  box-shadow: 0 8px 22px rgba(0,0,0,.3);
+  animation: spin 3.2s linear infinite;
+  animation-play-state: paused;
+}
+.disc.playing { animation-play-state: running; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.disc-face {
+  position: absolute; inset: 0; border-radius: 50%;
+  background: repeating-radial-gradient(circle at 50% 50%,
+    transparent 0 12px, rgba(255,255,255,.045) 12px 13px);
+}
+.disc-label {
+  position: absolute; left: 50%; top: 50%;
+  width: 56px; height: 56px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--amber-soft) 38%, var(--amber) 82%);
+  border: 2px solid rgba(60, 50, 40, .4);
+}
+.disc-label::after {
+  content: ""; position: absolute; left: 50%; top: 50%;
+  width: 7px; height: 7px; border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--paper);
+}
+.disc-shine {
+  position: absolute; left: 14px; top: 10px;
+  width: 44px; height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, rgba(255,255,255,.16), transparent);
+  transform: rotate(-24deg);
+  pointer-events: none;
+}
+/* 唱臂 */
+.tonearm {
+  position: absolute; right: 0; top: 5px;
+  width: 4px; height: 74px;
+  background: linear-gradient(180deg, var(--ink-soft), var(--ink));
+  border-radius: 2px;
+  transform-origin: 50% 8px;
+  transform: rotate(-24deg);
+  transition: transform .5s cubic-bezier(.6, 0, .3, 1.4);
+}
+.tonearm::before {
+  content: "";
+  position: absolute; top: 0; left: 50%;
+  width: 16px; height: 16px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: var(--ink-soft);
+}
+.tonearm i {
+  position: absolute; bottom: -6px; left: 50%;
+  width: 8px; height: 14px;
+  transform: translateX(-50%) rotate(24deg);
+  background: var(--amber);
+  border-radius: 2px;
+}
+.tonearm.playing { transform: rotate(9deg); }
+.gramo-tip {
+  margin-top: 16px;
+  font-family: var(--mono); font-size: 11px;
+  color: var(--ink-faint); letter-spacing: .2em;
+}
+
+/* ---------- 唱片套列表 ---------- */
+.sleeves {
+  max-width: 880px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px 26px;
+}
+.sleeve {
+  display: flex; gap: 16px; align-items: center;
+  padding: 16px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: transform .25s ease, box-shadow .25s ease;
+  text-align: left;
+}
+.sleeve:nth-child(odd) { transform: rotate(-.5deg); }
+.sleeve:nth-child(even) { transform: rotate(.5deg); }
+.sleeve:hover { transform: rotate(0) translateY(-3px); box-shadow: var(--shadow-lift); }
+.sleeve.playing { border-color: var(--amber); box-shadow: 0 0 0 1px var(--amber), var(--shadow-lift); }
+
+/* 迷你唱片 */
+.sleeve .mini-disc {
+  flex: none;
+  width: 62px; height: 62px;
+  border-radius: 50%;
+  background: repeating-radial-gradient(circle at 50% 50%,
+    #3a3530 0 1.5px, #2a2622 1.5px 3px);
+  position: relative;
+  transition: transform .5s ease;
+}
+.sleeve .mini-disc::after {
+  content: ""; position: absolute; left: 50%; top: 50%;
+  width: 20px; height: 20px; border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--moss);
+}
+.sleeve.playing .mini-disc { animation: spin 2.4s linear infinite; }
+
+.sleeve .s-meta { min-width: 0; display: block; flex: 1; }
+.sleeve .s-title {
+  display: block;
+  font-size: 16.5px; color: var(--ink);
+  letter-spacing: .06em;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.sleeve .s-artist {
+  display: block;
+  font-family: var(--mono); font-size: 11px;
+  color: var(--ink-faint); margin-top: 3px;
+}
+.sleeve .s-why {
+  display: block;
+  margin-top: 7px;
+  font-size: 12.5px; color: var(--ink-soft);
+  line-height: 1.7;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.sleeve .s-stem {
+  font-family: var(--mono); font-size: 10px;
+  color: var(--amber); letter-spacing: .1em;
+  margin-left: auto; flex: none;
+  writing-mode: vertical-rl;
+  opacity: .8;
+}
+
+.music-note {
+  margin-top: 40px; text-align: center;
+  font-size: 12px; color: var(--ink-faint);
+  letter-spacing: .25em;
+}
+
+@media (max-width: 760px) { .sleeves { grid-template-columns: 1fr; } }

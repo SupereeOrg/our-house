@@ -1,0 +1,227 @@
+/* ============================================================
+   拾窗 · 主页 v2 —— 一幅画 + 一张桌子
+   ============================================================ */
+
+/* ========== 第一幕：黄昏小屋 ========== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: 30px 16px;
+}
+.hero-stage {
+  position: relative;
+  width: min(92vh, 92vw);      /* 正方形画，适配视口 */
+  max-width: 760px;
+}
+.hero-img {
+  display: block; width: 100%; height: auto;
+  border-radius: 6px;
+  box-shadow:
+    0 3px 10px rgba(90, 62, 36, .18),
+    0 24px 60px rgba(90, 62, 36, .22);
+  border: 6px solid #fffdf6;               /* 画框：暖纸白衬边 */
+  outline: 1px solid rgba(90, 62, 36, .25);
+}
+
+/* 题字：右上天空 */
+.hero-title {
+  position: absolute;
+  top: 9%; right: 6%;
+  width: 36%;
+  text-align: center;
+  color: #fff8ea;
+  text-shadow: 0 1px 10px rgba(120, 60, 30, .55);
+  pointer-events: none;
+}
+.hero-title h1 {
+  font-family: var(--kai);
+  font-size: clamp(30px, 6.4vw, 52px);
+  font-weight: 400;
+  letter-spacing: .55em; text-indent: .55em;
+  line-height: 1.1;
+}
+.hero-title .byline {
+  margin-top: 6px;
+  font-size: clamp(12px, 1.8vw, 15px);
+  letter-spacing: .3em; text-indent: .3em;
+}
+.hero-title .byline b { font-weight: 600; }
+.hero-title .byline i { font-style: italic; opacity: .85; }
+.hero-line {
+  margin-top: 12px;
+  font-family: var(--kai);
+  font-size: clamp(12px, 1.7vw, 15px);
+  letter-spacing: .12em;
+  min-height: 1.6em;
+  opacity: .95;
+}
+.hero-hint {
+  margin-top: 8px;
+  font-family: var(--mono);
+  font-size: clamp(9px, 1.2vw, 11px);
+  letter-spacing: .25em;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+.hero-hint.show { opacity: .8; }
+
+/* ---------- 热区：窗里有灯 ---------- */
+.spot {
+  position: absolute;
+  left: calc(var(--x) - var(--w) / 2);
+  top: calc(var(--y) - var(--h) / 2);
+  width: var(--w); height: var(--h);
+  border-radius: 6px;
+  transform: translateZ(0);
+  transition: box-shadow .3s ease, background .3s ease;
+  cursor: pointer;
+}
+/* 悬停：一圈暖光晕 + 提示 */
+.spot:hover {
+  background: radial-gradient(ellipse at center,
+    rgba(255, 214, 130, .38) 0%, rgba(255, 214, 130, .12) 55%, transparent 75%);
+  box-shadow: 0 0 26px 6px rgba(255, 200, 110, .45);
+  /* 夜里也亮 */
+}
+/* 提示气泡 */
+.spot::after {
+  content: attr(data-tip);
+  position: absolute;
+  left: 50%; bottom: calc(100% + 8px);
+  transform: translateX(-50%) translateY(4px);
+  padding: 5px 12px;
+  background: rgba(43, 28, 16, .88);
+  color: #ffe9c2;
+  font-family: var(--kai);
+  font-size: 12.5px;
+  letter-spacing: .1em;
+  white-space: nowrap;
+  border-radius: 3px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease, transform .25s ease;
+}
+.spot:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+/* 靠边的热区气泡翻到下方 */
+.spot-cat::after, .spot-door::after { bottom: auto; top: calc(100% + 8px); }
+
+/* ---------- 下楼提示 ---------- */
+.scroll-hint {
+  position: absolute;
+  left: 50%; bottom: 20px;
+  transform: translateX(-50%);
+  display: flex; align-items: center; gap: 8px;
+  text-decoration: none;
+  color: #6b4429;
+  font-family: var(--kai);
+  font-size: 13px; letter-spacing: .25em;
+  padding: 7px 16px;
+  background: rgba(255, 250, 238, .82);
+  border: 1px solid rgba(107, 68, 41, .3);
+  border-radius: 20px;
+  backdrop-filter: blur(4px);
+  transition: all .3s ease;
+}
+.scroll-hint:hover { background: #fffaf0; transform: translateX(-50%) translateY(-2px); }
+.scroll-hint i { font-style: normal; animation: bob 2.2s ease-in-out infinite; }
+@keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+
+/* ========== 第二幕：楼下的桌面 ========== */
+.desk {
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 30px 22px 60px;
+}
+.desk-head { text-align: center; margin-bottom: 44px; }
+.desk-head h2 {
+  font-family: var(--kai);
+  font-size: 30px; font-weight: 400;
+  letter-spacing: .5em; text-indent: .5em;
+  color: var(--pine-deep);
+}
+.desk-sub {
+  margin-top: 10px;
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  letter-spacing: .2em;
+}
+
+/* 贴纸目录 */
+.stickers {
+  display: flex; flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px 34px;
+}
+.sticker {
+  width: 148px;
+  text-decoration: none;
+  text-align: center;
+  transition: transform .3s cubic-bezier(.34, 1.56, .64, 1);
+}
+.sticker img {
+  width: 118px; height: 118px;
+  object-fit: contain;
+  filter: drop-shadow(0 9px 14px rgba(90, 62, 36, .30));
+  transition: transform .3s cubic-bezier(.34, 1.56, .64, 1);
+}
+/* 错落：每张都有自己的角度和高度，像随手摆的 */
+.sticker:nth-child(8n+1) { transform: rotate(-5deg) translateY(6px); }
+.sticker:nth-child(8n+2) { transform: rotate(3.5deg) translateY(-8px); }
+.sticker:nth-child(8n+3) { transform: rotate(-2.5deg) translateY(12px); }
+.sticker:nth-child(8n+4) { transform: rotate(5.5deg); }
+.sticker:nth-child(8n+5) { transform: rotate(-4.5deg) translateY(-4px); }
+.sticker:nth-child(8n+6) { transform: rotate(2.8deg) translateY(14px); }
+.sticker:nth-child(8n+7) { transform: rotate(-3.2deg); }
+.sticker:nth-child(8n+8) { transform: rotate(4.2deg) translateY(8px); }
+.sticker:nth-child(4n+2) img { width: 104px; height: 104px; }   /* 大小不一 */
+.sticker:nth-child(4n+3) img { width: 130px; height: 130px; }
+.sticker:hover { transform: rotate(0) translateY(-8px) scale(1.07); z-index: 2; }
+.sticker:hover img { transform: rotate(-3deg) scale(1.04); }
+
+.st-name {
+  display: block;
+  margin-top: 12px;
+  font-family: var(--kai);
+  font-size: 18px;
+  color: var(--pine-deep);
+  letter-spacing: .18em;
+}
+.st-sub {
+  display: block;
+  margin-top: 4px;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--ink-faint);
+  letter-spacing: .08em;
+}
+.sticker:hover .st-name { color: var(--rust); }
+
+/* 桌角的猫 */
+.desk-cat {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  margin: 54px auto 0;
+  width: max-content;
+  text-decoration: none;
+  color: var(--ink-faint);
+  font-family: var(--kai);
+  font-size: 13px; letter-spacing: .15em;
+  transition: color .3s ease, transform .3s ease;
+}
+.desk-cat img { width: 130px; transition: transform .3s ease; }
+.desk-cat:hover { color: var(--pine-deep); transform: translateY(-3px); }
+.desk-cat:hover img { transform: rotate(-4deg); }
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 640px) {
+  .hero { padding: 18px 10px; align-items: flex-start; }
+  .hero-title { top: 6%; right: 4%; width: 44%; }
+  .spot::after { font-size: 11px; }
+  .stickers { gap: 22px 18px; }
+  .sticker { width: 120px; }
+  .sticker img { width: 92px !important; height: 92px; }
+  .scroll-hint { bottom: 10px; }
+}

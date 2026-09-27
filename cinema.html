@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>放映室 · 拾窗</title>
+<meta name="description" content="放映室——su 和 ee 收藏的视频，本期正在上映。">
+<link rel="stylesheet" href="assets/css/theme.css">
+<link rel="stylesheet" href="assets/css/page.css">
+<link rel="stylesheet" href="assets/css/cinema.css">
+<link rel="stylesheet" href="assets/css/interact.css">
+</head>
+<body class="in-cinema">
+
+<header class="page-bar">
+  <a class="back-home" href="index.html">☙ 返回屋顶</a>
+  <span class="crumb">路过放映厅</span>
+  <span class="room-name">放映室</span>
+</header>
+
+<main class="page-main">
+
+  <figure class="win-frame">
+    <img src="assets/img/cinema.png" alt="放映室——光束中的小影院">
+    <figcaption>cinema · 灯暗下来了，请入座</figcaption>
+  </figure>
+
+  <div class="room-head">
+    <h1>放映室</h1>
+    <p class="sub">ROOM 07 · <b>收藏视频</b> · 本期循环放映</p>
+  </div>
+
+  <!-- 银幕 -->
+  <section class="screen-room">
+    <div class="beam" aria-hidden="true"></div>
+    <div class="screen paper-window">
+      <div class="win-bar" style="border-color:rgba(255,255,255,.08)">
+        <span class="dots"><i></i><i></i><i></i></span>
+        <span class="path" id="screenTitle">now playing — 请挑选一部影片</span>
+      </div>
+      <div class="screen-body" id="screenBody">
+        <p class="screen-idle">▞▚ 等待放映 ▚▞</p>
+        <p class="screen-idle-sub">从下面的片单里挑一张票吧</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 电影票 -->
+  <section class="tickets" id="tickets"></section>
+
+  <p class="cinema-note">—— 票根请留好，也许哪天会对暗号 ——</p>
+
+</main>
+
+<button class="night-toggle" title="夜灯">☽</button>
+<a class="to-roof" href="index.html">← 返回屋顶</a>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/interact.js"></script>
+<script src="assets/js/cinema.js"></script>
+</body>
+</html>

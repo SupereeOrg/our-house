@@ -1,0 +1,103 @@
+/* ============================================================
+   檐下碎语 —— 风铃 + 便签墙
+   ============================================================ */
+
+/* ---------- 檐角与风铃 ---------- */
+.eave {
+  display: flex; justify-content: center;
+  margin: -6px 0 26px;
+  position: relative;
+}
+.eave::before {
+  content: "";
+  width: 180px; height: 10px;
+  background: var(--pine-deep);
+  border-radius: 0 0 6px 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,.15);
+}
+.chime {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  top: 8px; color: var(--ink-soft);
+  transform-origin: top center;
+  animation: sway 5.2s ease-in-out infinite;
+}
+@keyframes sway {
+  0%, 100% { transform: translateX(-50%) rotate(3.5deg); }
+  50% { transform: translateX(-50%) rotate(-3.5deg); }
+}
+.chime-line { position: absolute; top: -8px; left: 50%; width: 1.5px; height: 10px; background: var(--ink-soft); }
+.eave:hover .chime { animation-duration: 1.6s; }
+
+/* ---------- 便签墙 ---------- */
+/* 不用 CSS 多栏(columns)：Chromium 会把栏内首个便签骑缝的图钉/胶带
+   (top 负值)绘制到该栏底部(鬼影)。grid 布局无此问题。 */
+.slips-wall {
+  max-width: 860px;
+  margin: 0 auto;
+  /* 顶部留出图钉(13px)/胶带(9px)+悬浮位移的空间 */
+  padding-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  align-items: start;
+}
+.slip {
+  margin-bottom: 0; /* 行距由 gap 负责 */
+  padding: 18px 18px 14px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  position: relative;
+  font-size: 14.5px;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+/* 便签顶部微微歪斜，各不相同 */
+.slip:nth-child(odd)  { transform: rotate(-.7deg); }
+.slip:nth-child(even) { transform: rotate(.9deg); }
+.slip:hover { transform: rotate(0) translateY(-3px); box-shadow: var(--shadow-lift); z-index: 2; }
+
+/* 胶带 */
+.slip::before {
+  content: "";
+  position: absolute; top: -9px; left: 50%;
+  width: 74px; height: 18px;
+  transform: translateX(-50%) rotate(var(--tape-r, -2deg));
+  background: rgba(200, 155, 60, .28);
+  border-left: 1px dashed rgba(120, 90, 30, .25);
+  border-right: 1px dashed rgba(120, 90, 30, .25);
+}
+.clip-pine  { --tape-r: -2.5deg; }
+.clip-rust  { --tape-r: 3deg; background: #fdf8ee; }
+
+.slip-head {
+  display: flex; align-items: baseline; gap: 10px;
+  margin-bottom: 9px;
+}
+.slip-head .who {
+  font-family: var(--mono); font-size: 12px;
+  padding: 1px 8px; border-radius: 2px;
+  color: #fff;
+}
+.clip-pine .who { background: var(--pine); }
+.clip-rust .who { background: var(--rust); }
+.slip-head time {
+  font-family: var(--mono); font-size: 10.5px;
+  color: var(--ink-faint); letter-spacing: .08em;
+  margin-left: auto;
+}
+.slip p { color: var(--ink-soft); line-height: 1.85; }
+.slip-tags {
+  margin-top: 10px;
+  font-family: var(--mono); font-size: 10.5px;
+  color: var(--ink-faint); letter-spacing: .06em;
+}
+
+.wall-note {
+  margin-top: 8px;
+  text-align: center;
+  font-size: 12px; color: var(--ink-faint);
+  letter-spacing: .25em;
+}
+
+@media (max-width: 860px) { .slips-wall { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .slips-wall { grid-template-columns: 1fr; } }

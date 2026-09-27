@@ -1,0 +1,381 @@
+/* ============================================================
+   拾窗 · 小互动样式 —— 站内点缀小物件 / 封图热区 / 图钉 / 纸面终端
+   ============================================================ */
+
+/* 让绝对定位的小物件以版心为锚 */
+.page-main { position: relative; }
+
+/* ---------- 通用小气泡（物件说话时用） ---------- */
+.sprite-speech {
+  position: absolute;
+  min-width: 150px; max-width: 240px;
+  padding: 9px 13px;
+  background: rgba(43, 28, 16, .92);
+  color: #ffe9c2;
+  font-family: var(--kai);
+  font-size: 13px;
+  line-height: 1.7;
+  letter-spacing: .05em;
+  border-radius: 8px;
+  opacity: 0; pointer-events: none;
+  transition: opacity .3s ease;
+  z-index: 60;
+}
+.sprite-speech.show { opacity: 1; }
+
+/* ---------- 站内点缀小物件（贴在页面边角，不在封面上） ---------- */
+.standing-sprite {
+  position: absolute; z-index: 4;
+  border: none; background: none; padding: 0;
+  cursor: pointer;
+  transition: transform .3s cubic-bezier(.34, 1.56, .64, 1);
+}
+.standing-sprite img {
+  display: block; width: 64px;
+  filter: drop-shadow(0 6px 10px rgba(60, 40, 20, .32));
+}
+.standing-sprite:hover { transform: translateY(-5px) rotate(-3deg); }
+.standing-sprite.off img {
+  filter: brightness(.45) grayscale(.35) drop-shadow(0 6px 10px rgba(0,0,0,.5));
+}
+/* 各自的落座位置（版心百分比） */
+.spr-cup-whi   { right: 5%;  bottom: 5%; display: none; }
+.spr-lamp-wor  { left: 4%;   top: 40%; display: none; }
+.spr-plant-mus { right: 3%;  top: 52%; display: none; }
+.spr-cam-mis   { left: 4%;   bottom: 6%; display: none; }
+.spr-letter-ga { right: 3%;  bottom: 4%; display: none; }
+.spr-film-cin  { left: 4%;   bottom: 10%; display: none; }
+.spr-plant-abo { right: 5%;  bottom: 0; display: none; }
+.spr-plant-des { right: 2%;  bottom: 30px; display: none; }
+
+/* ---------- 主页：氛围热区（天空、月亮、草地……） ---------- */
+.tiny-spot {
+  position: absolute;
+  left: calc(var(--x) - var(--w) / 2);
+  top: calc(var(--y) - var(--h) / 2);
+  width: var(--w); height: var(--h);
+  border: 1px dashed rgba(255, 244, 214, 0);
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+  transition: border-color .3s ease, background .3s ease;
+}
+.tiny-spot:hover {
+  border-color: rgba(255, 233, 178, .55);
+  background: radial-gradient(ellipse at center,
+    rgba(255, 222, 150, .16) 0%, transparent 70%);
+}
+.tiny-spot::after {
+  content: attr(data-tip);
+  position: absolute; left: 50%; bottom: calc(100% + 6px);
+  transform: translateX(-50%);
+  /* 锁死为内容宽度：不随按钮宽度收缩 */
+  width: max-content; max-width: 240px;
+  padding: 4px 11px;
+  background: rgba(43, 28, 16, .88);
+  color: #ffe9c2;
+  font-family: var(--kai); font-size: 12px; letter-spacing: .1em;
+  white-space: nowrap; border-radius: 3px;
+  opacity: 0; transition: opacity .25s ease;
+}
+.tiny-spot:hover::after { opacity: 1; }
+.tiny-spot.edge-top::after { bottom: auto; top: calc(100% + 6px); }
+
+/* 主页气泡：点氛围热区后浮现的一句 */
+/* 定宽：气泡宽度由文字内容决定，不随定位点的可用空间被压窄 */
+.atmo-bubble {
+  position: absolute; z-index: 6;
+  transform: translate(-50%, -110%);
+  width: max-content;
+  max-width: 210px;
+  padding: 10px 14px;
+  background: rgba(43, 28, 16, .93);
+  color: #ffe9c2;
+  font-family: var(--kai); font-size: 13.5px; line-height: 1.7;
+  letter-spacing: .04em;
+  border-radius: 9px;
+  opacity: 0; pointer-events: none;
+  transition: opacity .35s ease;
+}
+.atmo-bubble::after {
+  content: "";
+  position: absolute; left: 50%; top: 100%;
+  transform: translateX(-50%);
+  border: 8px solid transparent;
+  border-top-color: rgba(43, 28, 16, .93);
+}
+.atmo-bubble.show { opacity: 1; }
+
+/* ---------- 封图上的互动热区 ---------- */
+.frame-hot {
+  position: absolute; z-index: 5;
+  left: calc(var(--x) - var(--w) / 2);
+  top: calc(var(--y) - var(--h) / 2);
+  width: var(--w); height: var(--h);
+  border: 1px dashed rgba(255, 244, 214, 0);
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+  transition: border-color .3s ease, background .3s ease;
+}
+.frame-hot:hover {
+  border-color: rgba(255, 233, 178, .55);
+  background: radial-gradient(ellipse at center,
+    rgba(255, 222, 150, .18) 0%, transparent 70%);
+}
+.frame-hot::after {
+  content: attr(data-tip);
+  position: absolute; left: 50%; bottom: calc(100% + 6px);
+  transform: translateX(-50%);
+  /* 锁死为内容宽度：不随按钮宽度收缩 */
+  width: max-content; max-width: 240px;
+  padding: 4px 11px;
+  background: rgba(43, 28, 16, .88);
+  color: #ffe9c2;
+  font-family: var(--kai); font-size: 12px; letter-spacing: .1em;
+  white-space: nowrap; border-radius: 3px;
+  opacity: 0; transition: opacity .25s ease;
+}
+.frame-hot:hover::after { opacity: 1; }
+.frame-hot.edge-top::after { bottom: auto; top: calc(100% + 6px); }
+
+/* 封图热区点击后的一句 */
+/* 定宽：同 .atmo-bubble，避免靠边热区的气泡被压成伪竖排 */
+.frame-bubble {
+  position: absolute; z-index: 20;
+  transform: translate(-50%, -115%);
+  width: max-content;
+  max-width: 220px;
+  padding: 10px 14px;
+  background: rgba(43, 28, 16, .93);
+  color: #ffe9c2;
+  font-family: var(--kai); font-size: 13.5px; line-height: 1.7;
+  letter-spacing: .04em;
+  border-radius: 9px;
+  opacity: 0; pointer-events: none;
+  transition: opacity .35s ease;
+}
+.frame-bubble::after {
+  content: "";
+  position: absolute; left: 50%; top: 100%;
+  transform: translateX(-50%);
+  border: 8px solid transparent;
+  border-top-color: rgba(43, 28, 16, .93);
+}
+.frame-bubble.show { opacity: 1; }
+
+/* 茶杯冒热气（站内的杯子也用） */
+.steam {
+  position: absolute;
+  left: 50%; bottom: 90%;
+  width: 6px; height: 16px;
+  border-radius: 50%;
+  background: rgba(255, 246, 224, .75);
+  filter: blur(3px);
+  opacity: 0;
+  animation: steam-up 1.6s ease-out infinite;
+}
+.steam:nth-child(2) { animation-delay: .5s; margin-left: -9px; }
+.steam:nth-child(3) { animation-delay: 1s; margin-left: 8px; }
+@keyframes steam-up {
+  0%   { opacity: 0; transform: translateY(6px) scaleX(1); }
+  30%  { opacity: .9; }
+  100% { opacity: 0; transform: translateY(-20px) scaleX(1.5); }
+}
+
+/* ---------- 慢读室：稿纸边的热茶 ---------- */
+.desk-teacup {
+  position: absolute; right: 0; bottom: 0;
+  z-index: 4;
+  width: 100px;
+  border: none; background: none; padding: 0;
+  cursor: pointer;
+  transition: transform .3s cubic-bezier(.34, 1.56, .64, 1);
+}
+.desk-teacup img { display: block; width: 100%; filter: drop-shadow(0 4px 8px rgba(60, 40, 20, .3)); }
+.desk-teacup:hover { transform: translateY(-4px) rotate(-3deg); }
+.desk-teacup.refill { animation: refill .7s ease; }
+@keyframes refill {
+  0% { transform: scale(1); } 40% { transform: scale(.86) rotate(-6deg); }
+  70% { transform: scale(1.1) rotate(2deg); } 100% { transform: scale(1); }
+}
+
+/* ---------- 檐下碎语：便签上的扁平图钉 ---------- */
+.slip::after {
+  content: "";
+  position: absolute; top: -13px; right: 22px;
+  width: 15px; height: 25px;
+  background: var(--pin-url, url("../img/deco/pin_flat_red.png")) center bottom / contain no-repeat;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 2px rgba(60, 40, 20, .3));
+}
+.slip:nth-child(2n)::after { --pin-url: url("../img/deco/pin_flat_amber.png"); }
+.slip:nth-child(3n)::after { --pin-url: url("../img/deco/pin_flat_green.png"); }
+/* 点一下便签：轻轻晃 */
+.slip.wiggle { animation: slip-wiggle .6s ease; }
+@keyframes slip-wiggle {
+  0%, 100% { transform: rotate(0); }
+  25% { transform: rotate(-1.6deg) translateY(-2px); }
+  60% { transform: rotate(1.2deg); }
+}
+
+/* ---------- 工作间：纸面终端（替换黑屏） ---------- */
+.term-body {
+  background-color: #3a2b1d;
+  background-image:
+    linear-gradient(rgba(44, 32, 20, .88), rgba(44, 32, 20, .88)),
+    url("../img/cork.jpg");
+  background-size: auto, 340px auto;
+  color: #f3ddb2;
+}
+.term-line { color: #f3ddb2; }
+.t-prompt { color: #ffca7a; margin-right: 10px; }
+.t-caret { background: #ffe9bd; }
+.proj {
+  border-left: none;
+  border-bottom: 1px dashed rgba(255, 235, 200, .22);
+  border-radius: 4px;
+  grid-template-columns: auto 1fr auto;
+  padding: 9px 12px;
+}
+.proj:hover {
+  background: rgba(255, 220, 160, .10);
+  border-left-color: transparent;
+}
+.proj .star { color: #ffd88a; }
+.proj .name { color: #ffeec9; }
+.proj .name small { color: rgba(255, 238, 201, .55); }
+.proj .lang { color: rgba(255, 238, 201, .5); }
+
+/* ---------- 拾遗集 & 关于小屋：可点条目的悄悄话 ---------- */
+.relic, .who { cursor: pointer; }
+.relic-pop {
+  margin-top: 14px;
+  padding: 10px 13px;
+  background: var(--paper-warm);
+  border: 1px dashed var(--line);
+  border-radius: 4px;
+  font-family: var(--kai);
+  font-size: 13.5px;
+  color: var(--pine-deep);
+  letter-spacing: .05em;
+  line-height: 1.8;
+  animation: pop-in .35s ease both;
+}
+@keyframes pop-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+/* ---------- 明信片墙：窗台许愿星 ---------- */
+.window-star {
+  position: absolute;
+  bottom: 5%;
+  left: 2%;
+  z-index: 6;
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  color: #fff3cf;
+  filter: drop-shadow(0 2px 6px rgba(255, 200, 110, .55));
+  transition: transform .3s cubic-bezier(.34, 1.56, .64, 1);
+  -webkit-transition: transform .3s cubic-bezier(.34, 1.56, .64, 1);
+  -moz-transition: transform .3s cubic-bezier(.34, 1.56, .64, 1);
+  -ms-transition: transform .3s cubic-bezier(.34, 1.56, .64, 1);
+  -o-transition: transform .3s cubic-bezier(.34, 1.56, .64, 1);
+}
+.window-star:hover { transform: scale(1.25) rotate(8deg); }
+.window-star.twinkle { animation: twinkle .7s ease; }
+@keyframes twinkle {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.7) rotate(14deg); filter: drop-shadow(0 0 12px rgba(255, 220, 130, .95)); }
+  100% { transform: scale(1); }
+}
+
+/* ---------- 八音盒：墙上的值日纸条 ---------- */
+.wall-notes {
+  max-width: 880px;
+  margin: 46px auto 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 22px 20px;
+}
+.wall-note-card {
+  position: relative;
+  padding: 20px 16px 15px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  line-height: 1.8;
+  text-align: center;
+  letter-spacing: .04em;
+  transform: rotate(var(--r, 0deg));
+  cursor: pointer;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.wall-note-card:nth-child(odd)  { --r: -1.2deg; }
+.wall-note-card:nth-child(even) { --r: 1.1deg; }
+.wall-note-card::before {
+  content: "";
+  position: absolute; top: -14px; left: 50%;
+  transform: translateX(-50%);
+  width: 15px; height: 26px;
+  background: var(--pin-url, url("../img/deco/pin_flat_red.png")) center bottom / contain no-repeat;
+  filter: drop-shadow(0 2px 2px rgba(60, 40, 20, .3));
+}
+.wall-note-card:nth-child(2n)::before { --pin-url: url("../img/deco/pin_flat_amber.png"); }
+.wall-note-card:nth-child(3n)::before { --pin-url: url("../img/deco/pin_flat_green.png"); }
+.wall-note-card:hover { transform: rotate(0) translateY(-4px); box-shadow: var(--shadow-lift); }
+.wall-note-card.wiggle { animation: slip-wiggle .6s ease; }
+
+/* ---------- 关于小屋：信箱旗子 + 小屋志的笔 ---------- */
+.mail-flag {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-left: 14px;
+  padding: 9px 20px;
+  border: 1px solid var(--pine-deep);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--pine-deep);
+  font-family: var(--kai); font-size: 14px;
+  letter-spacing: .25em; text-indent: .25em;
+  cursor: pointer;
+  transition: all .25s ease;
+}
+.mail-flag:hover { background: var(--pine-deep); color: var(--paper); }
+.mail-flag svg { transition: transform .5s cubic-bezier(.6, 0, .3, 1.4); }
+.mail-flag.raised svg { transform: rotate(-32deg) translateY(-2px); }
+.mail-flag-line {
+  margin-top: 12px;
+  font-family: var(--kai); font-size: 12.5px;
+  color: var(--ink-faint); letter-spacing: .08em;
+  min-height: 1.6em;
+}
+
+.log-pen {
+  position: absolute; right: 14px; top: 7px;
+  z-index: 4;
+  border: none; background: none;
+  cursor: pointer;
+  color: var(--ink-soft);
+  padding: 4px;
+  transition: transform .3s ease, color .3s ease;
+}
+.log-pen:hover { transform: rotate(-14deg) translateY(-2px); color: var(--pine-deep); }
+.house-log { position: relative; }
+.log-line.pen-in { animation: pop-in .45s ease both; }
+
+/* ---------- 猫威见：封面上的摸猫热区 ---------- */
+.pet-chip {
+  position: absolute; right: 12px; bottom: 12px;
+  z-index: 6;
+  padding: 4px 12px;
+  background: rgba(43, 28, 16, .8);
+  color: #ffe9c2;
+  font-family: var(--mono); font-size: 10.5px;
+  letter-spacing: .12em;
+  border-radius: 12px;
+  pointer-events: none;
+}

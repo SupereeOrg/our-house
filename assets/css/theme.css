@@ -1,0 +1,248 @@
+/* ============================================================
+   拾窗 · 全站主题 v2 —— 暖纸与烛光
+   ============================================================ */
+
+:root {
+  /* 暖纸色阶：像午后的书桌 */
+  --paper:       #fbf4e6;
+  --paper-warm:  #f6ead2;
+  --paper-dim:   #f1e2c8;
+  --ink:         #4a3a2c;
+  --ink-soft:    #7d6a54;
+  --ink-faint:   #ab977e;
+  /* 焦糖与陶土 */
+  --pine:        #8a5a3b;
+  --pine-deep:   #6b4429;
+  --moss:        #c08a52;
+  --amber:       #d49a3c;
+  --amber-soft:  #ecc987;
+  --rust:        #c06a45;
+  /* 极客暖端（终端改成暖棕夜灯） */
+  --term-bg:     #2e2620;
+  --term-green:  #d8b878;
+  /* 线与影 */
+  --line:        rgba(74, 58, 44, .20);
+  --line-soft:   rgba(74, 58, 44, .11);
+  --shadow:      0 2px 6px rgba(90, 62, 36, .10), 0 12px 32px rgba(90, 62, 36, .12);
+  --shadow-lift: 0 4px 10px rgba(90, 62, 36, .14), 0 18px 44px rgba(90, 62, 36, .18);
+  /* 字体：宋体阅读 · 楷体点缀 · 衬线西文 */
+  --serif: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "STSong", "SimSun", serif;
+  --kai: "Kaiti SC", "STKaiti", KaiTi, "Noto Serif SC", serif;
+  --mono: "Cascadia Code", "JetBrains Mono", Consolas, "Courier New", monospace;
+}
+
+/* 夜间：烛光书房 */
+body.night {
+  --paper:       #2b2320;
+  --paper-warm:  #262019;
+  --paper-dim:   #221c16;
+  --ink:         #e2d4bd;
+  --ink-soft:    #a8966d;
+  --ink-faint:   #837560;
+  --pine:        #c9a06a;
+  --pine-deep:   #a67c4b;
+  --moss:        #d0a26a;
+  --amber:       #e0ac55;
+  --amber-soft:  #8f6f3d;
+  --rust:        #d08a63;
+  --line:        rgba(226, 212, 189, .17);
+  --line-soft:   rgba(226, 212, 189, .09);
+  --shadow:      0 2px 6px rgba(0,0,0,.3), 0 12px 32px rgba(0,0,0,.35);
+  --shadow-lift: 0 4px 10px rgba(0,0,0,.4), 0 18px 44px rgba(0,0,0,.45);
+  --term-bg:     #1a1512;
+  --term-green:  #e0c188;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--serif);
+  color: var(--ink);
+  min-height: 100vh;
+  /* 暖纸底 + 细微水彩颗粒 */
+  background-color: #f6ecd9;
+  background-image:
+    radial-gradient(1100px 460px at 78% -8%, rgba(255, 236, 200, .85), transparent 62%),
+    radial-gradient(900px 500px at -10% 108%, rgba(240, 210, 160, .5), transparent 60%),
+    url("../img/paper_tex.png");
+  background-attachment: fixed;
+  transition: background-color .8s ease;
+}
+body.night {
+  background-color: #191411;
+  background-image:
+    radial-gradient(1100px 460px at 78% -8%, rgba(90, 62, 36, .55), transparent 62%),
+    radial-gradient(900px 500px at -10% 108%, rgba(60, 42, 26, .6), transparent 60%),
+    url("../img/paper_tex.png");
+}
+
+::selection { background: rgba(212, 154, 60, .35); }
+
+/* ---------- 纸窗（软木板题栏 · 相册角贴） ---------- */
+.paper-window {
+  position: relative;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: box-shadow .35s ease, transform .35s ease, background .8s ease;
+}
+/* 顶部两枚深色角贴：像旧相册的相角 */
+.paper-window::before, .paper-window::after {
+  content: "";
+  position: absolute; top: 0; z-index: 3;
+  width: 0; height: 0;
+  border-style: solid;
+  pointer-events: none;
+}
+.paper-window::before {
+  left: 0;
+  border-width: 15px 15px 0 0;
+  border-color: color-mix(in srgb, var(--pine-deep) 88%, transparent) transparent transparent transparent;
+}
+.paper-window::after {
+  right: 0;
+  border-width: 0 15px 15px 0;
+  border-color: transparent color-mix(in srgb, var(--pine-deep) 88%, transparent) transparent transparent;
+}
+.paper-window:hover { box-shadow: var(--shadow-lift); transform: translateY(-2px); }
+
+/* 题栏：一条浅色软木板，图钉 + 手写木牌 */
+.win-bar {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 18px 9px;
+  background-image: url("../img/cork.jpg");
+  background-size: 300px auto;
+  background-position: center;
+  border-bottom: 1px solid rgba(90, 62, 36, .38);
+  box-shadow:
+    inset 0 2px 5px rgba(96, 66, 36, .18),
+    inset 0 -4px 8px rgba(255, 244, 220, .16);
+}
+.win-bar .dots { display: none; }
+.win-bar .path {
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font-family: var(--kai);
+  font-size: 13.5px;
+  letter-spacing: .3em;
+  color: #402d1c;
+  text-shadow: 0 1px 0 rgba(255, 250, 238, .4);
+  font-weight: bold;
+}
+/* 图钉：压在字前的一枚红漆按钉 */
+.win-bar .path::before {
+  content: "";
+  display: inline-block;
+  width: 10px; height: 10px;
+  margin-right: 9px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #f4a588, #c65b3d 62%, #8f3a24);
+  box-shadow: 0 2px 3px rgba(70, 45, 20, .45);
+  vertical-align: 1px;
+}
+.win-bar .win-actions {
+  margin-left: auto;
+  font-family: var(--kai);
+  font-size: 12px; letter-spacing: .18em;
+  color: rgba(64, 45, 28, .8);
+  text-shadow: 0 1px 0 rgba(255, 250, 238, .35);
+}
+
+/* ---------- 通用 ---------- */
+a { color: inherit; }
+
+.btn-ink {
+  display: inline-block;
+  padding: 9px 26px;
+  border: 1px solid var(--pine-deep);
+  border-radius: 2px;
+  color: var(--pine-deep);
+  background: transparent;
+  font-family: var(--kai);
+  font-size: 15px;
+  letter-spacing: .35em;
+  text-indent: .35em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all .25s ease;
+}
+.btn-ink:hover { background: var(--pine-deep); color: var(--paper); letter-spacing: .45em; text-indent: .45em; }
+
+.hr-ink {
+  display: flex; align-items: center; gap: 14px;
+  margin: 26px 0; color: var(--ink-faint);
+}
+.hr-ink::before, .hr-ink::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.hr-ink i { width: 7px; height: 7px; background: var(--amber-soft); transform: rotate(45deg); }
+
+.sec-kicker {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .3em;
+  color: var(--ink-faint);
+  margin-bottom: 6px;
+}
+
+/* ---------- 夜灯 ---------- */
+.night-toggle {
+  position: fixed; right: 22px; bottom: 22px; z-index: 900;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  font-size: 18px; line-height: 1;
+  color: var(--ink-soft);
+  display: flex; align-items: center; justify-content: center;
+  transition: all .3s ease;
+}
+.night-toggle:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); color: var(--amber); }
+
+/* ---------- 返回屋顶 ---------- */
+.to-roof {
+  position: fixed; left: 22px; bottom: 22px; z-index: 900;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .2em;
+  color: var(--ink-soft); text-decoration: none;
+  padding: 9px 14px;
+  background: var(--paper); border: 1px solid var(--line); border-radius: 3px;
+  box-shadow: var(--shadow);
+  transition: all .3s ease;
+}
+.to-roof:hover { color: var(--pine-deep); transform: translateY(-2px); }
+
+/* ---------- 页脚 ---------- */
+.site-footer {
+  margin: 80px auto 0;
+  padding: 26px 20px 30px;
+  text-align: center;
+  color: var(--ink-faint);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .18em;
+}
+.site-footer .f-line { display: flex; align-items: center; justify-content: center; gap: 12px; }
+.site-footer .f-line::before, .site-footer .f-line::after {
+  content: ""; width: 60px; height: 1px; background: var(--line);
+}
+.site-footer .f-motto {
+  font-family: var(--kai); font-size: 13px;
+  letter-spacing: .5em; text-indent: .5em;
+  color: var(--ink-soft); margin-bottom: 8px;
+}
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 720px) {
+  .to-roof { left: 12px; bottom: 12px; padding: 7px 10px; }
+  .night-toggle { right: 12px; bottom: 12px; }
+  .paper-window::before, .paper-window::after { border-width: 10px 10px 0 0; }
+  .paper-window::after { border-width: 0 10px 10px 0; }
+}
+
+@media print {
+  .night-toggle, .to-roof { display: none !important; }
+  body { background: #fff !important; }
+  .paper-window { box-shadow: none; border-color: #999; }
+}

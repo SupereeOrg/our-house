@@ -1,0 +1,87 @@
+/* ============================================================
+   拾遗集 —— 桌面错落摆放
+   ============================================================ */
+
+.desk {
+  max-width: 920px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 34px;
+  flex-wrap: wrap;
+}
+.relic {
+  width: 250px;
+  padding: 26px 22px 20px;
+  text-align: center;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  box-shadow: var(--shadow);
+  position: relative;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+/* 错落：像随手放在桌上的三张卡片 */
+.r-1 { transform: rotate(-2.2deg) translateY(6px); }
+.r-2 { transform: translateY(-8px); }
+.r-3 { transform: rotate(2.4deg) translateY(10px); }
+.relic:hover { transform: rotate(0) translateY(-6px); box-shadow: var(--shadow-lift); z-index: 2; }
+
+/* 旧照片的角贴 */
+.relic::before, .relic::after {
+  content: "";
+  position: absolute; top: -7px;
+  width: 26px; height: 16px;
+  background: rgba(200, 155, 60, .25);
+  border: 1px solid rgba(120, 90, 30, .18);
+}
+.relic::before { left: 18px; transform: rotate(-8deg); }
+.relic::after { right: 18px; transform: rotate(8deg); }
+
+.relic-frame {
+  display: flex; justify-content: center;
+  width: 84px; height: 84px;
+  margin: 0 auto 16px;
+  align-items: center;
+  color: var(--pine-deep);
+  border: 1.5px solid var(--pine);
+  border-radius: 50%;
+  background: var(--paper-warm);
+  transition: all .3s ease;
+}
+.relic:hover .relic-frame {
+  background: var(--pine-deep);
+  color: var(--paper);
+  transform: rotate(-6deg);
+}
+.relic h3 {
+  font-weight: 400; font-size: 19px;
+  letter-spacing: .3em; text-indent: .3em;
+  margin-bottom: 10px; color: var(--ink);
+}
+.relic p {
+  font-size: 13.5px; line-height: 1.9;
+  color: var(--ink-soft);
+  text-align: justify;
+  text-align-last: center;
+}
+.relic-note {
+  display: block; margin-top: 14px;
+  font-family: var(--mono); font-size: 10.5px;
+  color: var(--ink-faint); letter-spacing: .15em;
+  border-top: 1px dashed var(--line);
+  padding-top: 10px;
+}
+
+.desk-note {
+  margin-top: 46px;
+  text-align: center;
+  font-size: 12px; color: var(--ink-faint);
+  letter-spacing: .25em;
+}
+
+@media (max-width: 860px) {
+  .desk { flex-direction: column; align-items: center; }
+  .r-1, .r-2, .r-3 { transform: none; }
+}

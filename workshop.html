@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>工作间 · 拾窗</title>
+<meta name="description" content="工作间——su 和 ee 的技术作品，print 正在输出。">
+<link rel="stylesheet" href="assets/css/theme.css">
+<link rel="stylesheet" href="assets/css/page.css">
+<link rel="stylesheet" href="assets/css/workshop.css">
+<link rel="stylesheet" href="assets/css/interact.css">
+</head>
+<body>
+
+<header class="page-bar">
+  <a class="back-home" href="index.html">☙ 返回屋顶</a>
+  <span class="crumb">路过工具墙</span>
+  <span class="room-name">工作间</span>
+</header>
+
+<main class="page-main">
+
+  <figure class="win-frame">
+    <img src="assets/img/workshop.png" alt="工作间——屏幕亮着，电路板与茶杯为伴">
+    <figcaption>workshop · while( awake ) { build(); } </figcaption>
+  </figure>
+
+  <div class="room-head">
+    <h1>工作间</h1>
+    <p class="sub">ROOM 03 · <b>技术作品</b> · stdout: 正在输出</p>
+  </div>
+
+  <!-- 终端项目清单 -->
+  <section class="term paper-window">
+    <div class="win-bar">
+      <span class="dots"><i></i><i></i><i></i></span>
+      <span class="path">墙上的项目便签 · 摘一个看看</span>
+      <span class="win-actions">图纸</span>
+    </div>
+    <div class="term-body">
+      <div class="term-line"><span class="t-prompt">su@shichuang:~$</span> ls ./projects --sort=star</div>
+      <div id="termList"></div>
+      <div class="term-line"><span class="t-prompt">su@shichuang:~$</span> <span class="t-caret" aria-hidden="true"></span></div>
+    </div>
+  </section>
+
+  <!-- 工具墙 -->
+  <section class="tools">
+    <div class="tools-head">
+      <i class="tool-tape" aria-hidden="true"></i>
+      <h2 class="tools-title">挂在墙上的工具</h2>
+      <p class="tools-sub">su@shichuang:~$ ls ./tools --sort=常用</p>
+    </div>
+    <div class="tools-wall">
+      <span class="tool" title="Python——su 最顺手的，也是 ee 的入坑语言">python</span>
+      <span class="tool" title="JavaScript / TypeScript——这座小屋就是它俩搭的">js · ts</span>
+      <span class="tool" title="Git——两个人的每一笔提交它都记得">git</span>
+      <span class="tool" title="Linux &amp; Vim——ee 的命令行生存包">linux · vim</span>
+      <span class="tool" title="Markdown——文档库与知识库的砖">md</span>
+      <span class="tool tool-more" title="更多工具陆续上墙">…更多</span>
+    </div>
+    <p class="tools-bb">（最上面挂着一把 vim，至今没人找到取下来的办法。）</p>
+  </section>
+
+</main>
+
+<button class="night-toggle" title="夜灯">☽</button>
+<a class="to-roof" href="index.html">← 返回屋顶</a>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/interact.js"></script>
+<script src="assets/js/workshop.js"></script>
+</body>
+</html>
